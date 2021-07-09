@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="numero" type="number">
+    <button id="punto1">Punto 1</button>
+    <button id="punto2">Punto 2</button>
+    <button id="punto3">Punto 3</button>
+    <div style="height: 90px;"  id="container">     
+
+    </div>
+    <div  id="container2">
+        <select name="figura" id="figura">
+            <option value="null" selected >seleccione una opción</option>
+            <option value="cuadrado">Cuadrado</option>
+            <option value="triangulo">Triángulo</option>
+            <option value="circulo">Circulo</option>
+        </select>
+        <input placeholder="seleccione una opción" type="number" id="numero2">
+        <input style="display: none;" placeholder="Digite la altura" type="number" id="numero3">
+        <button id="punto4">Punto 4</button>        
+    </div>
+    <div id="container3">       
+        
+    </div>
+</body>
+<script src="index.js" text="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    
+    $("#punto1").click(function(){
+        var number =$("#numero").val();
+        $("#container").empty()
+        var span= "*";
+        for(let i= 1;i<=number;i++){
+            $("#container").append(`
+                <span>${span}</p>
+            `)
+           span = span+"*"         
+        }
+    })
+    $("#punto2").click(function(){
+        var number =$("#numero").val();
+        $("#container").empty()
+        var span= "*";
+        for(let i= 1;i<number;i++){
+           span = span+"*"         
+        }
+        $("#container").append(`
+        <span>${span}</p>
+        `)
+        for(let i= 1;i<=number;i++){
+            $("#container").append(`
+                <span>${span.slice(0,-1)}</p>
+            `)
+            span = span.slice(0,-1)      
+         }
+    })
+    $("#punto3").click(function(){
+        var number =$("#numero").val();
+        $("#container").empty()
+        var span= "";
+        
+        for(let i= 1;i<=number;i++){
+            $("#container").append(`
+                <span>${span}</p>
+            `)
+            span = span+i;                
+         }
+         $("#container").append(`
+         <span>${span}</p>
+     `)
+    })
+        
+    $("#figura").change(function(){
+        var figura = $("#figura").val()
+        if(figura=="cuadrado"){
+            $("#numero3").hide()
+            $("#container3").empty();
+            $("#numero2").val("")
+            $("#numero3").val("")
+            $("#numero2").attr("placeholder", "Digite el valor del un lado del cuadrado").placeholder();
+        }
+        else if(figura=="triangulo"){
+            $("#numero3").show()
+            $("#container3").empty();
+            $("#numero2").val("")
+            $("#numero3").val("")
+            $("#numero2").attr("placeholder", "Digite la base").placeholder();
+           
+        }
+        else if(figura=="circulo"){
+            $("#numero3").hide()
+            $("#container3").empty();
+            $("#numero2").val("")
+            $("#numero3").val("")
+            $("#numero2").attr("placeholder", "Digite el radio").placeholder();            
+        }
+        else{
+            $("#numero3").hide()
+            $("#container3").empty();
+            $("#numero2").val("")
+            $("#numero3").val("")
+            $("#numero2").attr("placeholder", "seleccione una opción").placeholder();  
+        }
+    })
+    $("#punto4").click(function (){
+        var figura = $("#figura").val()
+        var number1 = $("#numero2").val()
+        var number2 = $("#numero3").val()
+
+        if(figura=="cuadrado"){
+            var valor = number1*number1;
+            $("#container3").empty();
+            $("#container3").append(`
+                <span>El área es: ${valor} </span>
+                ` );
+
+        }
+        else if(figura=="triangulo"){
+            var valor = (number1*number2)/2;
+            $("#container3").empty();
+            $("#container3").append(`
+                <span>El área es: ${valor} </span>
+                ` );
+           
+        }
+        else if(figura=="circulo"){
+            var valor = (number1**2)*Math.PI;
+            $("#container3").empty();
+            $("#container3").append(`
+                <span>El área es: ${valor} </span>
+                ` );         
+            }
+        else{
+            $("#numero3").hide()
+                       $("#container3").append(`
+                <span>debe seleccionar una opción </span>
+                ` );         
+            
+        }
+
+    })
+    
+</script>
+</html>
